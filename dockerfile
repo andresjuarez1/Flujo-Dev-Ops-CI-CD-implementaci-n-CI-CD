@@ -12,12 +12,12 @@ RUN npm install --unsafe-perm
 # Bundle app source
 COPY . .
 
-# Change to a non-root user
+# Create a non-root user and switch to it
 RUN useradd -m appuser
 USER appuser
 
 # Expose port
-EXPOSE 3000
+EXPOSE 3002
 
 # Command to run the application
 CMD ["node", "index.js"]
