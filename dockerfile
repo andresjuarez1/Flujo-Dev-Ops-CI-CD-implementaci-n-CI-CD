@@ -6,15 +6,18 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install app dependencies
-RUN npm install --unsafe-perm
+# Switch to root user to install dependencies
+USER root
 
-# Bundle app source
-COPY . .
+# Install app dependencies with unsafe permissions
+RUN npm install --unsafe-perm
 
 # Create a non-root user and switch to it
 RUN useradd -m appuser
 USER appuser
+
+# Bundle app source
+COPY . .
 
 # Expose port
 EXPOSE 3002

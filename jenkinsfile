@@ -6,11 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Build') {
             steps {
                 script {
@@ -21,9 +16,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh 'npm config set cache /tmp/.npm --global'
-                        sh 'npm cache clean --force'
+                    docker.image(DOCKER_IMAGE).inside('-u root') {
                         sh 'npm install --unsafe-perm'
                         sh 'npm test'
                     }
