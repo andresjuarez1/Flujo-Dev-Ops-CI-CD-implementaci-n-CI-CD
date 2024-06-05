@@ -20,7 +20,7 @@ USER appuser
 COPY . .
 
 # Expose port
-EXPOSE 3002
+EXPOSE 3003
 
 # Command to run the application
 CMD ["node", "index.js"]
